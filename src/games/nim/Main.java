@@ -12,11 +12,21 @@ public class Main {
         System.out.print("Nom du joueur 2 : ");
         String player2 = scanner.next();
 
-        System.out.print("Nombre d'allumettes au depart (n) : ");
-        int n = Integer.parseInt(scanner.next());
+        System.out.print("Nombre d'allumettes au depart : ");
+        while (!scanner.hasNextInt()) {
+            System.out.println("Saisie invalide : veuillez entrer un nombre entier valide.");
+            scanner.next();
+            System.out.print("Nombre d'allumettes au départ : ");
+        }
+        int n = scanner.nextInt();
 
-        System.out.print("Nombre max d'allumettes retirables par tour (k) : ");
-        int k = Integer.parseInt(scanner.next());
+        System.out.print("Nombre max d'allumettes retirables par tour : ");
+        while (!scanner.hasNextInt()) {
+            System.out.println("Saisie invalide : veuillez entrer un nombre entier valide.");
+            scanner.next();
+            System.out.print("Nombre max d'allumettes retirables : ");
+        }
+        int k = scanner.nextInt();
 
         Nim game = new Nim(n, k, player1, player2);
 
@@ -29,7 +39,12 @@ public class Main {
 
             while (!valid) {
                 System.out.print("Combien d'allumettes voulez-vous enlever ? ");
-                move = Integer.parseInt(scanner.next());
+                while (!scanner.hasNextInt()) {
+                    System.out.println("Saisie invalide : veuillez entrer un nombre entier valide.");
+                    scanner.next();
+                    System.out.print("Combien d'allumettes voulez-vous retirer ? ");
+                }
+                move = scanner.nextInt();
 
                 if (game.isValid(move)) {
                     valid = true;
