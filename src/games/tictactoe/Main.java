@@ -1,5 +1,4 @@
-package games.tictactoe ;
-
+package games.tictactoe;
 
 import java.util.Scanner;
 
@@ -11,27 +10,33 @@ public class Main {
         while (!game.isOver()) {
             System.out.println(game.situationToString());
             String joueur = game.getCurrentPlayer();
-            System.out.println("C'est au joueur " + joueur + " de jouer (ligne puis colonne, 0 à 2) : ");
-
-            int r = scanner.nextInt();
-            int c = scanner.nextInt();
-
+            System.out.println("C'est au joueur " + joueur + " de jouer : ");
+            int r = lireEntier(scanner, "ligne (0 à 2) : ");
+            int c = lireEntier(scanner, "colonne (0 à 2) : ");
             if (game.isValid(r, c)) {
                 game.execute(r, c);
             } else {
-                System.out.println("Coup invalide, réessayez !");
+                System.out.println("coup invalide, ressayez !\n");
             }
         }
 
-        // Affichage final
         System.out.println(game.situationToString());
         String winner = game.getWinner();
         if (winner != null) {
-            System.out.println("Le joueur " + winner + " a gagné !");
+            System.out.println("le joueur " + winner + " a gagne !");
         } else {
-            System.out.println("Match nul !");
+            System.out.println("match nul !");
         }
-
         scanner.close();
+    }
+
+    public static int lireEntier(Scanner scan, String message) {
+        System.out.print(message);
+        try {
+            return Integer.parseInt(scan.next());
+        } catch (NumberFormatException exception) {
+            System.out.println("Le nombre que vous avez saissis n'est pas valide ressayez : ");
+            return lireEntier(scan, message);
+        }
     }
 }
